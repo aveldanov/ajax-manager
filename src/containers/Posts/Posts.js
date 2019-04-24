@@ -10,6 +10,8 @@ class Posts extends Component {
   }
 
   componentDidMount() {
+    console.log(this.props);
+
     axios.get('/posts')
       .then(res => {
         const posts = res.data.slice(0, 4);
@@ -28,10 +30,6 @@ class Posts extends Component {
       .catch(error => {
         console.log(error);
 
-        // console.log("ERROR HERE: " + error);
-        // this.setState({
-        //   error: true
-        // })
       })
   }
 
@@ -44,12 +42,10 @@ class Posts extends Component {
   }
   render() {
 
-    console.log(this.state.posts);
 
     let posts = <p style={{ color: 'red' }}>Something went wrong...</p>
     if (!this.state.error) {
       posts = this.state.posts.map((post) => {
-        console.log(post);
         return <Post
           key={post.id}
           title={post.title}
