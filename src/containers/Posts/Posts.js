@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 import axios from '../../../src/axios';
+
 import Post from '../../components/Post/Post';
 import './Posts.css';
 
-
-export class Posts extends Component {
-
+class Posts extends Component {
   state = {
     posts: []
   }
@@ -45,11 +44,12 @@ export class Posts extends Component {
   }
   render() {
 
+    console.log(this.state.posts);
+
     let posts = <p style={{ color: 'red' }}>Something went wrong...</p>
     if (!this.state.error) {
       posts = this.state.posts.map((post) => {
-        // console.log(post);
-
+        console.log(post);
         return <Post
           key={post.id}
           title={post.title}
@@ -57,7 +57,7 @@ export class Posts extends Component {
           clicked={() => {
             this.postSelectedHandler(post.id)
           }}
-        />;
+        />
       })
 
     }
@@ -65,6 +65,7 @@ export class Posts extends Component {
 
     return (
       <section className="Posts">
+
         {posts}
       </section>
     )
