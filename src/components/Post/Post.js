@@ -3,7 +3,7 @@ import React from 'react';
 import './Post.css';
 
 const post = (props) => {
-  console.log(props);
+  // console.log(props);
   return (
 
 

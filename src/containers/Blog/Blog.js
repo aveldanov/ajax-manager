@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
-import { Route, NavLink } from 'react-router-dom';
+import { Route, NavLink, Switch, Redirect } from 'react-router-dom';
 
 
 import './Blog.css';
 import Posts from '../Posts/Posts';
-import NewPost from '../NewPost/NewPost'
+import NewPost from '../NewPost/NewPost';
+// import FullPost from '../FullPost/FullPost';
 
 class Blog extends Component {
 
-
+  state = {
+    auth: false
+  }
 
 
 
@@ -21,10 +24,10 @@ class Blog extends Component {
             <ul>
               <li><NavLink
                 exact
-                to="/"
+                to="/posts/"
                 activeClassName="my-active"
                 activeStyle={{ color: "red" }}
-              >Home</NavLink></li>
+              >Posts</NavLink></li>
               <li><NavLink to={{
                 pathname: '/new-post',
                 hash: '#submmit',
@@ -34,10 +37,20 @@ class Blog extends Component {
             </ul>
           </nav>
         </header>
+        <Switch>
+          {this.state.auth ? <Route path="/new-post" component={NewPost} /> : null}
 
-        <Route path="/" exact component={Posts} />
+          <Route path="/posts" component={Posts} />
+          <Route render={() => <h1>Not found</h1>} />
+          {/* <Redirect from="/" to="/posts" /> */}
 
-        <Route path="/new-post" exact component={NewPost} />
+          {/* <Route path="/" component={Posts} /> */}
+
+
+          {/* <Route path="/posts/:id" exact component={FullPost} /> */}
+        </Switch>
+
+
 
       </div>
     );
